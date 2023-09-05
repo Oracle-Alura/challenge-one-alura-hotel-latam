@@ -5,6 +5,9 @@
 </p>
 
 ---
+
+[![Alt text](https://img.youtube.com/vi/u41pCWg4VEA/0.jpg)](https://www.youtube.com/watch?v=u41pCWg4VEA)
+
 ##  Primeros Pasos:
 
 
