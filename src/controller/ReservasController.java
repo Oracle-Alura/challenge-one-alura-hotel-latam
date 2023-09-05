@@ -6,7 +6,6 @@ import java.util.List;
 
 import conexion.ConnectionFactory;
 import dao.ReservaDAO;
-import model.Huespedes;
 import model.Reserva;
 
 public class ReservasController {
@@ -31,10 +30,11 @@ public class ReservasController {
 		}
 		
 		// Listar por APELLIDO
+		/*
 		public List<Huespedes> buscarApellido(String apellido) {
 			return this.reservaDAO.buscarApellido(apellido);
 		}
-		
+		*/
 		public void actualizar(Date fechaE, Date fechaS, String valor, String formaPago, Integer id) {
 			this.reservaDAO.Actualizar(fechaE, fechaS, valor, formaPago, id);
 		}

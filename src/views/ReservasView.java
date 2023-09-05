@@ -318,8 +318,7 @@ public class ReservasView extends JFrame {
 		txtFormaPago.setBackground(SystemColor.text);
 		txtFormaPago.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 		txtFormaPago.setFont(new Font("Roboto", Font.PLAIN, 16));
-		txtFormaPago.setModel(new DefaultComboBoxModel(
-				new String[] { "Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo" }));
+		txtFormaPago.setModel(new DefaultComboBoxModel(new String[] { "Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo" }));
 		panel.add(txtFormaPago);
 
 		// Botón Siguiente
@@ -327,9 +326,9 @@ public class ReservasView extends JFrame {
 		btnsiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if ((txtFechaEntrada.getDate() != null && txtFechaSalida.getDate() != null)) {
+				if((txtFechaEntrada.getDate() != null && txtFechaSalida.getDate() != null)) {
 					guardarReserva();
-				} else {
+				}else {
 					JOptionPane.showMessageDialog(null, "Debes llenar todos los campos");
 				}
 			}
@@ -342,19 +341,17 @@ public class ReservasView extends JFrame {
 		btnsiguiente.add(lblSiguiente);
 	}
 
-	private void guardarReserva() {
-		String fechaE = ((JTextField) txtFechaEntrada.getDateEditor().getUiComponent()).getText();
-		String fechaS = ((JTextField) txtFechaSalida.getDateEditor().getUiComponent()).getText();
-
-		Reserva nuevaReserva = new Reserva(java.sql.Date.valueOf(fechaE), java.sql.Date.valueOf(fechaS),
-				txtValor.getText(), txtFormaPago.getSelectedItem().toString());
+	private void guardarReserva() {	
+		String fechaE = ((JTextField)txtFechaEntrada.getDateEditor().getUiComponent()).getText();
+		String fechaS = ((JTextField)txtFechaSalida.getDateEditor().getUiComponent()).getText();
+		Reserva nuevaReserva = new Reserva(java.sql.Date.valueOf(fechaE), java.sql.Date.valueOf(fechaS), txtValor.getText(), txtFormaPago.getSelectedItem().toString());
 		reservasController.guardar(nuevaReserva);
-
-		JOptionPane.showMessageDialog(contentPane, "Registro Guardado con éxito, id " + nuevaReserva.getId());
-
+		
+		JOptionPane.showMessageDialog(contentPane,"Registro Guardado con éxito, id: " + nuevaReserva.getId());
+		
 		RegistroHuesped huesped = new RegistroHuesped(nuevaReserva.getId());
 		huesped.setVisible(true);
-		dispose();
+		dispose();		
 	}
 
 	// Calcula el valor a partir de contar los dias de la reserva y multiplicar por

@@ -11,19 +11,20 @@ import java.util.List;
 
 import model.Huespedes;
 
+
 public class HuespedesDAO {
-
-	private Connection connection;
-
+private Connection connection;
+	
 	public HuespedesDAO(Connection connection) {
 		this.connection = connection;
 	}
-
+	
 	public void guardar(Huespedes huesped) {
 		try {
-			String sql = "INSERT INTO huespedes (nombre, apellido, fechaNac, nacionalidad, telefono, idReserva) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO huespedes (nombre, apellido, fechaNac, nacionalidad, telefono, idReserva) VALUES (?, ?, ?, ?,?,?)";
 
 			try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
 				pstm.setString(1, huesped.getNombre());
 				pstm.setString(2, huesped.getApellido());
 				pstm.setDate(3, huesped.getFechaNacimiento());
@@ -43,7 +44,6 @@ public class HuespedesDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
 	public List<Huespedes> listarHuespedes() {
 		List<Huespedes> huespedes = new ArrayList<Huespedes>();
 		try {
@@ -59,7 +59,7 @@ public class HuespedesDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	public List<Huespedes> buscarId(String id) {
 		List<Huespedes> huespedes = new ArrayList<Huespedes>();
 		try {
@@ -77,11 +77,10 @@ public class HuespedesDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
-	public void Actualizar(String nombre, String apellido, Date fechaN, String nacionalidad, String telefono,
-			Integer idReserva, Integer id) {
-		try (PreparedStatement stm = connection.prepareStatement(
-				"UPDATE huespedes SET nombre = ?, apellido = ?, fechaNac = ?, nacionalidad = ?, telefono = ?, idReserva = ? WHERE id = ?")) {
+	
+	public void Actualizar(String nombre, String apellido, Date fechaN, String nacionalidad, String telefono, Integer idReserva, Integer id) {
+		try (PreparedStatement stm = connection
+				.prepareStatement("UPDATE huespedes SET nombre = ?, apellido = ?, fechaNac = ?, nacionalidad = ?, telefono = ?, idReserva = ? WHERE id = ?")) {
 			stm.setString(1, nombre);
 			stm.setString(2, apellido);
 			stm.setDate(3, fechaN);
@@ -94,7 +93,6 @@ public class HuespedesDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
 	public void Eliminar(Integer id) {
 		try (PreparedStatement stm = connection.prepareStatement("DELETE FROM huespedes WHERE id = ?")) {
 			stm.setInt(1, id);
@@ -103,15 +101,16 @@ public class HuespedesDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	private void transformarResultSetEnHuesped(List<Huespedes> reservas, PreparedStatement pstm) throws SQLException {
 		try (ResultSet rst = pstm.getResultSet()) {
 			while (rst.next()) {
-				Huespedes huespedes = new Huespedes(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getDate(4),
-						rst.getString(5), rst.getString(6), rst.getInt(7));
+				Huespedes huespedes = new Huespedes(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getDate(4), rst.getString(5), rst.getString(6), rst.getInt(7));
 				reservas.add(huespedes);
 			}
-		}
+		}				
 	}
-
+	
+	
+		
 }

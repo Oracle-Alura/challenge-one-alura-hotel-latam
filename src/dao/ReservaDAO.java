@@ -9,12 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Huespedes;
 import model.Reserva;
 
 public class ReservaDAO {
 	
-private Connection connection;
+	private Connection connection;
 	
 	public ReservaDAO(Connection connection) {
 		this.connection = connection;
@@ -29,7 +28,7 @@ private Connection connection;
 				pstm.setDate(1, reserva.getfechaE());
 				pstm.setDate(2, reserva.getfechaS());
 				pstm.setString(3, reserva.getvalor());
-				pstm.setString(4, reserva.getformaPago());
+				pstm.setString(4, reserva.getformaPago());				
 
 				pstm.executeUpdate();
 
@@ -79,38 +78,6 @@ private Connection connection;
 		}
 	}
 	
-	//Metodo para buscar por APELLIDO (Alejandra)	
-	public List<Huespedes> buscarApellido(String apellido) {
-		List<Huespedes> huespedes = new ArrayList<Huespedes>();
-		try {
-
-			String sql = "SELECT id, nombre, apellido, valor, fechaNac, nacionalidad, telefono FROM huespedes WHERE apellido = ?";
-
-			try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-				pstm.setString(3, apellido);
-				pstm.execute();
-
-				transformarResultSetEnHuespedes(huespedes, pstm);
-			}
-			return huespedes;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	
-	
-	private void transformarResultSetEnHuespedes(List<Huespedes> huespedes, PreparedStatement pstm) throws SQLException {
-		try (ResultSet rst = pstm.getResultSet()) {
-			while (rst.next()) {
-				Huespedes huesped = new Huespedes(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getDate(4), rst.getString(5), rst.getString(6), rst.getInt(7));
-								
-				huespedes.add(huesped);
-			}
-		}
-		
-	}
-
 	public void Eliminar(Integer id) {
 		try (PreparedStatement stm = connection.prepareStatement("DELETE FROM reservas WHERE id = ?")) {
 			stm.setInt(1, id);
@@ -143,6 +110,4 @@ private Connection connection;
 			}
 		}
 	}
-	
-
 }
