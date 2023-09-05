@@ -1,2 +1,8 @@
-/imagenes/
 /views/
+/com/
+/ListarDatos.class
+/model/
+/ClienteDAO/
+/controller/
+/dao/
+/conexion/

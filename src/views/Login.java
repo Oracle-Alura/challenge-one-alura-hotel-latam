@@ -1,22 +1,23 @@
 package views;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import java.awt.SystemColor;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JPasswordField;
-import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class Login extends JFrame {
 
@@ -81,11 +82,19 @@ public class Login extends JFrame {
 		JPanel btnexit = new JPanel();
 		btnexit.setBounds(251, 0, 53, 36);
 		panel_1.add(btnexit);
+		
+		//Botón salir que debe preguntar al usuario si realmente desea salir de la aplicación (Alejandra).
 		btnexit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
+				int respuesta = JOptionPane.showConfirmDialog(null, "¡Espera! ¿Seguro deseas salir?", "Salir del programa",
+						JOptionPane.YES_NO_OPTION);
+
+				if (respuesta == JOptionPane.YES_OPTION) {					
+					System.exit(0);
+				}	
 			}
+			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				btnexit.setBackground(Color.red);
@@ -238,7 +247,7 @@ public class Login extends JFrame {
 		 String Usuario= "admin";
 	     String Contraseña="admin";
 
-	        String contrase=new String (txtContrasena.getPassword());
+	        String contrase = new String (txtContrasena.getPassword());
 
 	        if(txtUsuario.getText().equals(Usuario) && contrase.equals(Contraseña)){
 	            MenuUsuario menu = new MenuUsuario();
