@@ -6,6 +6,9 @@
 
 ---
 
+![cms_files_10224_1677508436Prancheta_1](https://github.com/Oracle-Alura/challenge-one-alura-hotel-latam/assets/95290077/2a3339bb-4299-4885-9cfc-321076dc11c9)
+
+
 [![Alt text](https://img.youtube.com/vi/u41pCWg4VEA/0.jpg)](https://www.youtube.com/watch?v=u41pCWg4VEA)
 
 ##  Primeros Pasos:
